@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <navigatorContent
+            activeByDefault="true"
+            contentProvider="nh.projectexplorer.archive.ArchiveContentProvider"
+            id="nh.projectexplorer.navigatorContent1"
+            labelProvider="nh.projectexplorer.archive.ArchiveLabelProvider"
+            name="Archive Browser"
+            priority="high">
+         <triggerPoints>
+         	<and>
+            <instanceof
+                  value="org.eclipse.core.resources.IFile" />
+            <test
+           		forcePluginActivation="true"
+           		property="org.eclipse.core.resources.extension"
+           		value="zip"/>
+            </and>
+         </triggerPoints>
+      </navigatorContent>
+   </extension>
+      <!-- the navigator content-->
+   <extension point="org.eclipse.ui.navigator.viewer">
+      <viewer viewerId="org.eclipse.ui.navigator.ProjectExplorer"> </viewer>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension isRoot="false"
+               pattern="nh.projectexplorer.navigatorContent1"> </contentExtension>
+         </includes>
+      </viewerContentBinding>
+   </extension>
+   
+      <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <navigatorContent
+            activeByDefault="true"
+            contentProvider="nh.projectexplorer.allarchives.AllArchivesContentProvider"
+            id="nh.projectexplorer.navigatorContent.root1"
+            labelProvider="nh.projectexplorer.allarchives.AllArchivesLabelProvider"
+            name="All Archives"
+            priority="high">
+         <triggerPoints>
+            <instanceof
+                  value="org.eclipse.core.resources.IWorkspaceRoot" />
+         </triggerPoints>
+      </navigatorContent>
+   </extension>
+      <extension point="org.eclipse.ui.navigator.viewer">
+      <viewer viewerId="org.eclipse.ui.navigator.ProjectExplorer"> </viewer>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension isRoot="false"
+               pattern="nh.projectexplorer.navigatorContent.root1"> </contentExtension>
+         </includes>
+      </viewerContentBinding>
+   </extension>
+
+</plugin>
